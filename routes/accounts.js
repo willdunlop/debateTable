@@ -12,3 +12,5 @@ router.use(methodOverride(function(req, res){
     return method
   }
 }))
+
+//Up to the third box of controller section for kendrick colemans tutorial
