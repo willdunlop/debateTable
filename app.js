@@ -13,6 +13,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var index = require('./routes/index');
 var users = require('./routes/users');
 var acc = require('./routes/account');
+var deb = require('./routes/debate');
 
 //Model variables
 var db = require('./models/db');
@@ -42,6 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use('/', index);
 app.use('/users', users);
 app.use('/', acc);
+app.use('/debate', deb);
 
 // passport config
 var Account = require('./models/account');
@@ -49,6 +51,7 @@ passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
+var Debate = require('./models/debate');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
