@@ -206,4 +206,6 @@ router.delete('/:id/edit', function(req, res){
   });
 });
 
-module.exports = router; 
+module.exports = router;
+
+//you need to make views now
