@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+  if (!user)
+    h1 Hello There
+    p.lead You are not logged in to an account.
+    p How do you expect to change settings?
+  if (user)
+    .container
+      h1 Account Settings
+      p.lead Account control panel for #{user.username}

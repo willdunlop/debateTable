@@ -20,7 +20,12 @@ router.post('/register', function(req, res) {
         }
 
         passport.authenticate('local')(req, res, function () {
+          req.session.save(function(err){
+            if (err) {
+              return next(err);
+            }
             res.redirect('/');
+          });
         });
     });
 });
@@ -36,6 +41,10 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
 router.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
+});
+
+router.get('/settings', function(req,res){
+  res.render('account/settings', { user: req.user });
 });
 
 router.get('/ping', function(req, res){
