@@ -2,18 +2,29 @@
 //- Navbar mixins
 mixin nav(name, id, style)
   - var style = (typeof style === 'undefined') ? "default" : style
-  nav( role="navigation", class=["navbar", "navbar-" + style] )
+  nav( role="navigation", class=["navbar-inverse", "navbar-" + style] )
     .navbar-header
       button.navbar-toggle.collapsed( type="button", data-toggle="collapse", data-target="#" + id, aria-expanded="false", aria-controls="navbar")
         span.sr-only Toggle navigation
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.navbar-brand(href="#")= name
+      a.navbar-brand(href="/")= name
 
     .collapse.navbar-collapse( id=id )
       ul.nav.navbar-nav
-        block
+        +nav_item( "/", "active" ) Home
+        +nav_item( "/debates" ) Debates
+        +nav_item( "contact.html" ) Contact
+      ul.nav.navbar-nav.navbar-right
+        if (!user)
+          +nav_item( "/login" ) Login
+          +nav_item( "/register" ) Register 
+        if (user)
+          +nav_item_dropdown( "#" )( label="Account")
+            +nav_item( "/settings" ) Settings
+            +nav_item( "/logout" ) Logout
+      
 
 mixin nav_item(href, active)
   li(class=active): a( href=href )
@@ -37,16 +48,7 @@ mixin nav_header
 
 
 +nav("DebateTable", "dropdown_menu")
-  +nav_item( "/", "active" ) Home
-  +nav_item( "about.html" ) Debates
-  +nav_item( "contact.html" ) Contact
-  if (!user)
-    +nav_item( "/login" ) Login
-    +nav_item( "/register" ) Register 
-  if (user)
-    +nav_item_dropdown( "#" )( label="Account")
-      +nav_item( "/settings" ) Settings
-      +nav_item( "/logout" ) Logout
+
     //- +nav_divider
     //- +nav_header Nav header
     //- +nav_item( "#" ) Separated link

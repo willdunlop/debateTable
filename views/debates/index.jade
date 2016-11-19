@@ -1,0 +1,32 @@
+extends ../layout
+
+block content
+  h1.
+    #{title}
+  ul
+    - each debate, i in debates
+      div.eaitem#eadebate
+        p Topic: 
+          = debate.topic
+        p Type:
+          = debate.comparitive
+        p Created by:
+          = debate.user
+                  
+        p  
+          a(href='/debate/#{debate._id}') 
+            button.btn.btn-primary(type='button') View
+            &nbsp;
+          if (user)
+            if (debate.user.toString() == user._id)
+              a(href='/debate/#{debate.id}/edit')
+                button.btn.btn-primary(type='button') Edit
+              &nbsp;
+              form(action='/debate/#{debate._id}/edit',method='post',enctype='application/x-www-form-urlencoded')
+                input(type='hidden',value='DELETE',name='_method')
+                button.btn.btn-danger(type='submit').
+                  Delete 
+                
+        br
+        br
+    

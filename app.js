@@ -43,7 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use('/', index);
 app.use('/users', users);
 app.use('/', acc);
-app.use('/debate', deb);
+app.use('/debates', deb);
 
 // passport config
 var Account = require('./models/account');

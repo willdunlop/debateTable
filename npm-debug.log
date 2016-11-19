@@ -9,7 +9,7 @@
 6 silly lifecycle debatetable@0.0.0~prestart: no script for prestart, continuing
 7 info lifecycle debatetable@0.0.0~start: debatetable@0.0.0
 8 verbose lifecycle debatetable@0.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle debatetable@0.0.0~start: PATH: /home/will/.nvm/versions/node/v6.9.1/lib/node_modules/npm/bin/node-gyp-bin:/home/will/CoderFactory/nodeLearn/debateTable/node_modules/.bin:/home/will/.nvm/versions/node/v6.9.1/bin:/home/will/.rvm/gems/ruby-2.3.1/bin:/home/will/.rvm/gems/ruby-2.3.1@global/bin:/home/will/.rvm/rubies/ruby-2.3.1/bin:/home/will/.npm-global/bin:/usr/local/heroku/bin:~/.npm-global/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/will/.rvm/bin:/home/will/.rvm/bin:/home/will/.rvm/bin
+9 verbose lifecycle debatetable@0.0.0~start: PATH: /home/will/.nvm/versions/node/v6.9.1/lib/node_modules/npm/bin/node-gyp-bin:/home/will/CoderFactory/nodeLearn/debateTable/node_modules/.bin:/home/will/.nvm/versions/node/v6.9.1/bin:/home/will/.rvm/gems/ruby-2.3.1/bin:/home/will/.rvm/gems/ruby-2.3.1@global/bin:/home/will/.rvm/rubies/ruby-2.3.1/bin:/home/will/.npm-global/bin:/home/will/bin:/usr/local/heroku/bin:~/.npm-global/bin:/home/will/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/will/.rvm/bin:/home/will/.rvm/bin:/home/will/.rvm/bin
 10 verbose lifecycle debatetable@0.0.0~start: CWD: /home/will/CoderFactory/nodeLearn/debateTable
 11 silly lifecycle debatetable@0.0.0~start: Args: [ '-c', 'node ./bin/www' ]
 12 silly lifecycle debatetable@0.0.0~start: Returned: code: 1  signal: null

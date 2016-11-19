@@ -11,8 +11,12 @@ var Debate = new Schema({
     unique: true
   },
   comparitive: Boolean,
-  red: String,
-  blue: String
+  // red: [
+  //   {type: mongoose.Schema.Types.ObjectId, ref: 'Red'}
+  // ],
+  // blue: [
+  //   {type: mongoose.Schema.Types.ObjectId, ref: 'Blue'}
+  // ],
 
 
 });

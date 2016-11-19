@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  h1.
+    #{title}
+  form#formAddDebate(name="adddebate",method="post",action="/debates")
+    p Topic: 
+      input#inputTopic(type="text",placeholder="Debate Topic",name="topic")
+    p Comparitive?
+      input#inputComparitive(type="checkbox",name="comparitive")
+    p
+      input#inputUser(type="hidden",value="#{user._id}",name="user")
+    
+    p
+      button#btnSubmit(type="submit") Start Debate

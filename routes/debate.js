@@ -19,15 +19,18 @@ router.route('/')
   //GET all debates
   .get(function(req, res, next) {
     //retrive from db
-    mongoose.model('Debate').find({}. function(err, debate) {
+    var user = req.user;
+    mongoose.model('Debate').find({}, function(err, debates) {
       if (err) {
         return console.error(err);
       } else {
         res.format({
           html: function(){
-            res.render('debate/index', {
+            res.render('debates/index', {
               title: "Debates",
-              "debates" : debates
+              "debates" : debates,
+              user: user,
+              author: debate.user.toString();
             });
           },
           json: function(){
@@ -42,16 +45,18 @@ router.route('/')
     //retrieve values from POST request
     var topic = req.body.topic;
     var comparitive = req.body.comparitive;
-    var red = req.body.red;
-    var blue = req.body.blue;
+    var user = req.user;
+    //var red = req.body.red;
+    //var blue = req.body.blue;
     mongoose.model('Debate').create({
       topic : topic,
       comparitive : comparitive,
-      red : red,
-      blue : blue
+      user : user
+      //red : red,
+      //blue : blue
     }, function(err, debate){
       if (err) {
-        res.send("Shit fucked up in the POST for debate ");
+        res.send("Shit fucked up in the POST for debate " + err);
       } else {
         //Debate has been created
         console.log('POST: Creating new debate: ' + debate);
@@ -70,7 +75,10 @@ router.route('/')
 
   //Get new debate page
   router.get('/new', function(req, res) {
-    res.render('debat/new', { title: 'Start A Debate'});
+    res.render('debates/new', {
+      title: 'Start A Debate',
+      user: req.user
+    });
   });
 
   //middleware for validating debate :id's
@@ -158,26 +166,27 @@ router.put('/:id/edit', function(req, res) {
   //Find by id
   mongoose.model('Debate').findById(req.id, function(err, debate) {
     //update it
-    title : title,
-    comparitive : comparitive,
-    red : red,
-    blue : blue
-  }, function(err, debateID) {
-    if (err) {
-      res.send("There was an error when trying to update the debate: " + err);
-    } else {
-      res.format({
-        html: function(){
-          res.redirect("/debate/" + debate._id);
-        },
-        json: function(){
-          res.json(debate);
-        }
-      });
-    }
-  })
+    debate.update({
+      title : title,
+      comparitive : comparitive,
+      red : red,
+      blue : blue
+    }, function(err, debateID) {
+      if (err) {
+        res.send("There was an error when trying to update the debate: " + err);
+      } else {
+        res.format({
+          html: function(){
+            res.redirect("/debate/" + debate._id);
+          },
+          json: function(){
+            res.json(debate);
+          }
+        });
+      }
+    })
+  });
 });
-//MAY BE MISSING A SET OF CLOSE BRACKETS HERE BUT I DOUBT IT
 
 //DELETE a debate by ID
 router.delete('/:id/edit', function(req, res){
