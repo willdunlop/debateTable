@@ -29,8 +29,7 @@ router.route('/')
             res.render('debates/index', {
               title: "Debates",
               "debates" : debates,
-              user: user,
-              author: debate.user.toString();
+              user: user              
             });
           },
           json: function(){

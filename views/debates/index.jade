@@ -3,6 +3,11 @@ extends ../layout
 block content
   h1.
     #{title}
+  a(href='/debates/new')
+    button.btn.btn-primary(type='button') Begin a Debate
+  br
+  br
+  br
   ul
     - each debate, i in debates
       div.eaitem#eadebate
@@ -15,12 +20,12 @@ block content
                   
         p  
           a(href='/debate/#{debate._id}') 
-            button.btn.btn-primary(type='button') View
+            button.btn.btn-default(type='button') View
             &nbsp;
           if (user)
             if (debate.user.toString() == user._id)
               a(href='/debate/#{debate.id}/edit')
-                button.btn.btn-primary(type='button') Edit
+                button.btn.btn-default(type='button') Edit
               &nbsp;
               form(action='/debate/#{debate._id}/edit',method='post',enctype='application/x-www-form-urlencoded')
                 input(type='hidden',value='DELETE',name='_method')
