@@ -29,7 +29,7 @@ router.route('/')
             res.render('debates/index', {
               title: "Debates",
               "debates" : debates,
-              user: user              
+              user: user
             });
           },
           json: function(){
@@ -119,7 +119,7 @@ router.route('/:id')
         console.log('GET: Retrieving debate: ' + debate._id);
         res.format({
           html:function(){
-            res.render('debate/show', {
+            res.render('debates/show', {
               "debate" : debate
             });
           },
@@ -134,6 +134,7 @@ router.route('/:id')
 //GET the debates edit page
 router.get('/:id/edit', function(req, res){
   //search through db for mathching id
+  var user = req.user;
   mongoose.model('Debate').findById(req.id, function(err, debate){
     if (err){
       console.log('GET: There was an issue retrieving: ' + err);
@@ -142,9 +143,10 @@ router.get('/:id/edit', function(req, res){
       console.log('GET: Retrieving deabte: ' + debate._id);
       res.format({
       html: function(){
-        res.render('debate/edite', {
+        res.render('debates/edit', {
           title: 'Debate' + debate._id,
-          "debate" : debate
+          "debate" : debate,
+          user: user
         });
       },
       json: function(){
@@ -176,7 +178,7 @@ router.put('/:id/edit', function(req, res) {
       } else {
         res.format({
           html: function(){
-            res.redirect("/debate/" + debate._id);
+            res.redirect("/debates/" + debate._id);
           },
           json: function(){
             res.json(debate);
@@ -200,7 +202,7 @@ router.delete('/:id/edit', function(req, res){
           console.log('DELETE: Deleting: ' + debate._id);
           res.format({
             html: function() {
-              res.redirect("/debate");
+              res.redirect("/debates");
             },
             json: function(){
               res.json({message: 'deleted',

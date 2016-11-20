@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var Debate = new Schema({
   user: [
-    {type: mongoose.Schema.Types.ObjectId, ref: 'Account'}
+    {type: Schema.Types.ObjectId, ref: 'Account'}
   ],
   topic: {
     type: String,

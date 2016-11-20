@@ -8,26 +8,26 @@ block content
   br
   br
   br
-  ul
+  ul.alldebates
     - each debate, i in debates
       div.eaitem#eadebate
         p Topic: 
           = debate.topic
-        p Type:
+        p Type: 
           = debate.comparitive
-        p Created by:
+        p Created by: 
           = debate.user
-                  
+          
         p  
-          a(href='/debate/#{debate._id}') 
+          a(href='/debates/#{debate._id}') 
             button.btn.btn-default(type='button') View
             &nbsp;
           if (user)
             if (debate.user.toString() == user._id)
-              a(href='/debate/#{debate.id}/edit')
+              a(href='/debates/#{debate.id}/edit')
                 button.btn.btn-default(type='button') Edit
               &nbsp;
-              form(action='/debate/#{debate._id}/edit',method='post',enctype='application/x-www-form-urlencoded')
+              form(action='/debates/#{debate._id}/edit',method='post',enctype='application/x-www-form-urlencoded')
                 input(type='hidden',value='DELETE',name='_method')
                 button.btn.btn-danger(type='submit').
                   Delete 

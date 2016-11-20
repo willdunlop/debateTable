@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  h1.
+    #{debate.topic} Settings
+  form(action='/debates/#{debate._id}/edit',method='post',name='updatedebate',enctype='application/x-www-form-urlencoded')
+    p Topic: 
+      input#inputTopic(type="text",value='#{debate.topic}',placeholder="Debate Topic",name="topic")
+    p Comparitive?
+      input#inputComparitive(type="checkbox",value='#{debate.comparitive}',name="comparitive")
+    p
+      input#inputUser(type="hidden",value="#{user._id}",name="user")
+    
+    p
+      button#btnSubmit(type="submit") Update Debate

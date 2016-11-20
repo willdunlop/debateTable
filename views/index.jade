@@ -1,11 +1,22 @@
 extends layout
 
 block content
-
+  br
+  img(src='images/logo-yell-small.jpg')
+  
   if (!user)
-    a(href="/login") Login
-    br
-    a(href="/register") Register
+    p
+    p.lead Please log in if you wish to participate in any debates
+    a(href="/login") 
+      button.btn.btn-primary(type='button') Login
+    &nbsp;
+    a(href="/register") 
+      button.btn.btn-default(type='button') Register
   if (user)
-    p You are currently logged in as #{user.username}
-    a(href="/logout") Logout
+    p
+    p Nice to see you again #{user.username}
+    a(href="/logout") 
+      button.btn.btn-default(typ='button') Logout
+  
+  div.seperate
+  p DebateTable © 2016  -  William Dunlop

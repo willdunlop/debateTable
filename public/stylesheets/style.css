@@ -1,8 +1,66 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #fff4b2;
+  text-align: center;
 }
 
 a {
   color: #00B7FF;
+}
+
+.navbar-custom {
+  background-color: #e3a44c;
+  color: #ffffff;
+}
+
+.navbar-custom .navbar-nav>.active>a{
+  background-color: #ebbe7f;
+  color: #ffffff;
+}
+
+.navbar-custom .navbar-nav>.active> a:hover{
+  background-color: #d75700;
+
+}
+
+.navbar-custom .navbar-header>.navbar-brand {
+  color: #ffffff;
+}
+
+.navbar-custom .navbar-nav>.other>a {
+  color: #ffffff;
+}
+
+.navbar-collapse .navbar-nav>.dropdown>a:hover,
+.navbar-collapse .navbar-nav>.dropdown>a:focus {
+
+  background-color: #d75700;
+  color: #fff;
+
+}
+
+.navbar-collapse .navbar-nav>.dropdown>.dropdown-menu,
+.navbar-collapse .navbar-nav>.dropdown>.dropdown-menu>.other>a {
+  background-color: #ebbe7f;
+  color: #ffffff;
+}
+
+.navbar-collapse .navbar-nav>.dropdown>.dropdown-menu>.other>a:hover {
+  background-color: #d75700;
+}
+
+.logo {
+  background-image: url('../images/logo-yell-small.jpg');
+  background-size: contain;
+  width: 400px;
+  height: 150px
+}
+
+.seperate {
+  width:65%;
+  height: 10px;
+  border-bottom: solid;
+  border-color: #e3a44c;
+  margin: 20px auto 0 auto;
 }

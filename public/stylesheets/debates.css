@@ -1,0 +1,15 @@
+.logo {
+  background-image: image-url('logo-yell-small.jpg');
+  width: 200px;
+  height: 100px
+}
+
+.alldebates {
+  width: 100%;
+  height: auto;
+}
+
+.eaitem {
+  background-color: #333333;
+  color: #fff;
+}
