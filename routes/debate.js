@@ -20,25 +20,47 @@ router.route('/')
   .get(function(req, res, next) {
     //retrive from db
     var user = req.user;
-    mongoose.model('Debate').find({}, function(err, debates) {
+    mongoose.model('Debate').find({})
+    .populate('user').exec(function(err, debates) {
       if (err) {
         return console.error(err);
       } else {
-        res.format({
-          html: function(){
-            res.render('debates/index', {
-              title: "Debates",
-              "debates" : debates,
-              user: user
+        mongoose.model('Debate').populate(docs, {
+            path: 'user',
+            model: 'Account'
+          }, function(err, debates){
+            if (err) {
+            return callback(err);
+          } else {
+            console.log(debates);
+            res.format({
+              html: function(){
+                res.render('debates/index', {
+                  title: "Debates",
+                  "debates" : debates,
+                  user: user
+                });
+              },
+              json: function(){
+                res.json(infophotos);
+              }
             });
-          },
-          json: function(){
-            res.json(infophotos);
-          }
-        });
-      }
+          };
+
+      };
     });
-  })
+    // .populate('user').exec(function(err, docs) {
+    //   if(err) return callback(err);
+    //   mongoose.model('Debate').populate(docs, {
+    //     path: 'user',
+    //     model: 'Account'
+    //   }, function(err, debates){
+    //     if (err) return callback(err);
+    //     console.log(debates);
+    //   });
+    // });
+  });
+})
   //POST a new debate
   .post(function(req, res) {
     //retrieve values from POST request
@@ -64,13 +86,16 @@ router.route('/')
             res.location("debates");
             res.redirect("/debates");
           },
-          Json: function(){
+          json: function(){
             res.json(debate);
           }
         });
       }
     })
   });
+
+
+
 
   //Get new debate page
   router.get('/new', function(req, res) {
@@ -215,6 +240,7 @@ router.delete('/:id/edit', function(req, res){
     }
   });
 });
+
 
 module.exports = router;
 

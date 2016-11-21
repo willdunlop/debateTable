@@ -17,6 +17,7 @@
     "jade": "~1.11.0",
     "method-override": "^2.3.6",
     "mocha": "~1.14.0",
+    "mongo-relation": "^0.5.4",
     "mongoose": "^4.6.8",
     "morgan": "~1.7.0",
     "passport": "^0.2.1",
