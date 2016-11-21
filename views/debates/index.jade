@@ -22,7 +22,7 @@ block content
             button.btn.btn-default(type='button') View
             &nbsp;
           if (user)
-            if (debate.user.toString() == user._id)
+            if (debate.user._id == user._id)
               a(href='/debates/#{debate.id}/edit')
                 button.btn.btn-default(type='button') Edit
               &nbsp;

@@ -3,6 +3,8 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
+var debateMod = require('../models/debate');
+
 
 
 router.use(bodyParser.urlencoded({ extended: true }))
@@ -25,14 +27,13 @@ router.route('/')
       if (err) {
         return console.error(err);
       } else {
-        mongoose.model('Debate').populate(docs, {
+        mongoose.model('Debate').populate(debates, {
             path: 'user',
             model: 'Account'
           }, function(err, debates){
             if (err) {
             return callback(err);
           } else {
-            console.log(debates);
             res.format({
               html: function(){
                 res.render('debates/index', {
@@ -45,22 +46,24 @@ router.route('/')
                 res.json(infophotos);
               }
             });
-          };
-
-      };
-    });
-    // .populate('user').exec(function(err, docs) {
-    //   if(err) return callback(err);
-    //   mongoose.model('Debate').populate(docs, {
-    //     path: 'user',
-    //     model: 'Account'
-    //   }, function(err, debates){
-    //     if (err) return callback(err);
-    //     console.log(debates);
-    //   });
-    // });
+          }
+      });
+    }
   });
 })
+
+
+
+// .populate('user').exec(function(err, docs) {
+//   if(err) return callback(err);
+//   mongoose.model('Debate').populate(docs, {
+//     path: 'user',
+//     model: 'Account'
+//   }, function(err, debates){
+//     if (err) return callback(err);
+//     console.log(debates);
+//   });
+// });
   //POST a new debate
   .post(function(req, res) {
     //retrieve values from POST request
@@ -69,30 +72,61 @@ router.route('/')
     var user = req.user;
     //var red = req.body.red;
     //var blue = req.body.blue;
-    mongoose.model('Debate').create({
-      topic : topic,
-      comparitive : comparitive,
-      user : user
-      //red : red,
-      //blue : blue
-    }, function(err, debate){
+
+    var newDebate = new debateMod({
+      topic: topic,
+      comparitive: comparitive,
+      user: user
+    });
+    newDebate.save(function(err, debate){
       if (err) {
-        res.send("Shit fucked up in the POST for debate " + err);
+        return callback(err);
       } else {
-        //Debate has been created
-        console.log('POST: Creating new debate: ' + debate);
-        res.format({
-          html: function(){
-            res.location("debates");
-            res.redirect("/debates");
-          },
-          json: function(){
-            res.json(debate);
+        debateMod.findOne(debate).populate('user').exec(function(err, debate){
+          if (err) {
+            return callback(err);
+          } else {
+            console.log('POST: Creating new debate: ' + debate);
+            res.format({
+              html: function(){
+                res.location("debates");
+                res.redirect("/debates");
+              },
+              json: function(){
+                res.json(debate);
+              }
+            });
           }
         });
       }
-    })
+    });
   });
+
+  //   mongoose.model('Debate').create({
+  //     topic : topic,
+  //     comparitive : comparitive,
+  //     user : user
+  //     //red : red,
+  //     //blue : blue
+  //   }, function(err, debate){
+  //     if (err) {
+  //       res.send("Shit fucked up in the POST for debate " + err);
+  //     } else {
+  //       //Debate has been created
+  //
+  //       console.log('POST: Creating new debate: ' + debate);
+  //       res.format({
+  //         html: function(){
+  //           res.location("debates");
+  //           res.redirect("/debates");
+  //         },
+  //         json: function(){
+  //           res.json(debate);
+  //         }
+  //       });
+  //     }
+  //   })
+  // });
 
 
 

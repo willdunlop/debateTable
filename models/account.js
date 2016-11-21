@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-require('mongo-relation');
 var passportLocalMongoose = require('passport-local-mongoose');
 
 var Account = new Schema({
@@ -9,5 +8,4 @@ var Account = new Schema({
 });
 
 Account.plugin(passportLocalMongoose);
-
 module.exports = mongoose.model('Account', Account);

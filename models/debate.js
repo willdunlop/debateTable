@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-require('mongo-relation');
 var Schema = mongoose.Schema;
 
 var Debate = new Schema({
@@ -18,8 +17,7 @@ var Debate = new Schema({
   // blue: [
   //   {type: mongoose.Schema.Types.ObjectId, ref: 'Blue'}
   // ],
-
-
+  
 });
 
 module.exports = mongoose.model('Debate', Debate);
