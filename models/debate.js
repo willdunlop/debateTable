@@ -17,7 +17,7 @@ var Debate = new Schema({
   // blue: [
   //   {type: mongoose.Schema.Types.ObjectId, ref: 'Blue'}
   // ],
-  
+
 });
 
 module.exports = mongoose.model('Debate', Debate);
