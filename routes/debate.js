@@ -56,11 +56,22 @@ router.route('/')
   //POST a new debate
   .post(function(req, res) {
     //retrieve values from POST request
+    //debate values
     var topic = req.body.topic;
     var comparitive = req.body.comparitive;
     var user = req.user;
-    var red = req.body.red;
-    var blue = req.body.blue;
+    //red and blue values
+    var redname = req.body.redname;
+    var bluename = req.body.bluename
+    //create red per debate made
+    var red = new redMod({
+      name: redname
+    });
+
+
+    var blue = new blueMod({
+      name: bluename
+    });
 
     var newDebate = new debateMod({
       topic: topic,

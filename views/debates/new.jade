@@ -8,6 +8,17 @@ block content
       input#inputTopic(type="text",placeholder="Debate Topic",name="topic")
     p Comparitive?
       input#inputComparitive(type="checkbox",name="comparitive")
+    
+    if (comparitive === true)
+      p Side 1: 
+        input#inputRedName(type="text",placeholder="Side 1",name="redname")
+      p Side 2:
+        input#inputBlueName(type="text",placeholder="Side 2", name="bluename")
+    
+    if (comparitive === false)
+      input#inputRedName(type="hidden",value="For",name="redname")
+      input#inputBlueName(type="hidden",value="Against",name="redname")
+      
     p
       input#inputUser(type="hidden",value="#{user._id}",name="user")
     p
