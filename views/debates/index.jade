@@ -16,7 +16,7 @@ block content
         p Type: 
           = debate.comparitive
         p Created by: 
-          = debate
+          = debate.user[0].username
         p  
           a(href='/debates/#{debate._id}') 
             button.btn.btn-default(type='button') View
@@ -33,4 +33,3 @@ block content
                 
         br
         br
-    

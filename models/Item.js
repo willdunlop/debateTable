@@ -13,8 +13,11 @@ var Item = new Schema({
   source: String,
   upvote: Number,
   red_blue: Boolean,
+  comment: [
+    {type: Schema.Types.ObjectId, ref: 'Comment'}
+  ],
   user: [
-    {type: mongoose.Schema.Types.ObjectId, ref: 'Account'}
+    {type: Schema.Types.ObjectId, ref: 'Account'}
   ]
 });
 

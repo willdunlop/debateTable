@@ -4,6 +4,8 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var debateMod = require('../models/debate');
+var redMod = require('../models/red');
+var blueMod = require('../models/blue');
 
 
 
