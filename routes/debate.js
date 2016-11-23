@@ -8,7 +8,6 @@ var redMod = require('../models/red');
 var blueMod = require('../models/blue');
 
 
-
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(methodOverride(function(req, res) {
   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -54,37 +53,27 @@ router.route('/')
   });
 })
 
-
-
-// .populate('user').exec(function(err, docs) {
-//   if(err) return callback(err);
-//   mongoose.model('Debate').populate(docs, {
-//     path: 'user',
-//     model: 'Account'
-//   }, function(err, debates){
-//     if (err) return callback(err);
-//     console.log(debates);
-//   });
-// });
   //POST a new debate
   .post(function(req, res) {
     //retrieve values from POST request
     var topic = req.body.topic;
     var comparitive = req.body.comparitive;
     var user = req.user;
-    //var red = req.body.red;
-    //var blue = req.body.blue;
+    var red = req.body.red;
+    var blue = req.body.blue;
 
     var newDebate = new debateMod({
       topic: topic,
       comparitive: comparitive,
-      user: user
+      user: user,
+      red: red,
+      blue: blue
     });
     newDebate.save(function(err, debate){
       if (err) {
         return callback(err);
       } else {
-        debateMod.findOne(debate).populate('user').exec(function(err, debate){
+        debateMod.findOne(debate).populate('user', 'red', 'blue').exec(function(err, debate){
           if (err) {
             return callback(err);
           } else {
@@ -103,34 +92,6 @@ router.route('/')
       }
     });
   });
-
-  //   mongoose.model('Debate').create({
-  //     topic : topic,
-  //     comparitive : comparitive,
-  //     user : user
-  //     //red : red,
-  //     //blue : blue
-  //   }, function(err, debate){
-  //     if (err) {
-  //       res.send("Shit fucked up in the POST for debate " + err);
-  //     } else {
-  //       //Debate has been created
-  //
-  //       console.log('POST: Creating new debate: ' + debate);
-  //       res.format({
-  //         html: function(){
-  //           res.location("debates");
-  //           res.redirect("/debates");
-  //         },
-  //         json: function(){
-  //           res.json(debate);
-  //         }
-  //       });
-  //     }
-  //   })
-  // });
-
-
 
 
   //Get new debate page
