@@ -11,12 +11,11 @@ var Debate = new Schema({
     unique: true
   },
   comparitive: Boolean,
-  red: [
-    {type: mongoose.Schema.Types.ObjectId, ref: 'Red'}
-  ],
-  blue: [
-    {type: mongoose.Schema.Types.ObjectId, ref: 'Blue'}
-  ],
+  red: String,
+  blue: String,
+  item: [
+    {type: Schema.Type.ObjectId, ref: 'Item'}
+  ]
 
 });
 

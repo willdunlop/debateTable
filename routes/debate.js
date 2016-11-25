@@ -61,30 +61,18 @@ router.route('/')
     var comparitive = req.body.comparitive;
     var user = req.user;
     //red and blue values
-    var redname = req.body.redname;
-    var bluename = req.body.bluename
-    //create red per debate made
-    var red = new redMod({
-      name: redname
-    });
 
-
-    var blue = new blueMod({
-      name: bluename
-    });
 
     var newDebate = new debateMod({
       topic: topic,
       comparitive: comparitive,
-      user: user,
-      red: red,
-      blue: blue
+      user: user
     });
     newDebate.save(function(err, debate){
       if (err) {
         return callback(err);
       } else {
-        debateMod.findOne(debate).populate('user', 'red', 'blue').exec(function(err, debate){
+        debateMod.findOne(debate).populate('user').exec(function(err, debate){
           if (err) {
             return callback(err);
           } else {
