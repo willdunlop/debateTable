@@ -3,8 +3,12 @@ extends ../layout
 block content
   h1.
     #{title}
-  a(href='/debates/new')
-    button.btn.btn-primary(type='button') Begin a Debate
+  
+  if(user)
+    a(href='/debates/new')
+      button.btn.btn-primary(type='button') Begin a Debate
+  if(!user)
+    h4 Please log in to start a debate
   br
   br
   br
@@ -17,12 +21,13 @@ block content
           = debate.comparitive
         p Created by: 
           = debate.user[0].username
+          
         p  
           a(href='/debates/#{debate._id}') 
             button.btn.btn-default(type='button') View
             &nbsp;
           if (user)
-            if (debate.user._id == user._id)
+            if (debate.user[0].id.toString() == user._id)
               a(href='/debates/#{debate.id}/edit')
                 button.btn.btn-default(type='button') Edit
               &nbsp;

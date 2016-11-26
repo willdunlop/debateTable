@@ -7,7 +7,6 @@ var debateMod = require('../models/debate');
 var redMod = require('../models/red');
 var blueMod = require('../models/blue');
 
-
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(methodOverride(function(req, res) {
   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -59,6 +58,8 @@ router.route('/')
     //debate values
     var topic = req.body.topic;
     var comparitive = req.body.comparitive;
+    var red = req.body.red;
+    var blue = req.body.blue;
     var user = req.user;
     //red and blue values
 
@@ -66,6 +67,8 @@ router.route('/')
     var newDebate = new debateMod({
       topic: topic,
       comparitive: comparitive,
+      red: red,
+      blue: blue,
       user: user
     });
     newDebate.save(function(err, debate){
@@ -141,7 +144,8 @@ router.route('/:id')
         res.format({
           html:function(){
             res.render('debates/show', {
-              "debate" : debate
+              "debate" : debate,
+              title: debate.topic
             });
           },
           json: function(){

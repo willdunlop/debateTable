@@ -11,10 +11,14 @@ var Debate = new Schema({
     unique: true
   },
   comparitive: Boolean,
-  red: String,
-  blue: String,
+  red: {
+    type: String, default: 'For'
+  },
+  blue: {
+    type: String, default: 'Against'
+  },
   item: [
-    {type: Schema.Type.ObjectId, ref: 'Item'}
+    {type: Schema.Types.ObjectId, ref: 'Item'}
   ]
 
 });

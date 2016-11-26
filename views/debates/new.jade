@@ -9,20 +9,40 @@ block content
     p Comparitive?
       input#inputComparitive(type="checkbox",name="comparitive")
     
-    if (comparitive === true)
+    div#comparitiveOptions(style="display: none;")
       p Side 1: 
-        input#inputRedName(type="text",placeholder="Side 1",name="redname")
+        input#inputRed(type="text",placeholder="Side 1",name="red")
       p Side 2:
-        input#inputBlueName(type="text",placeholder="Side 2", name="bluename")
+        input#inputBlue(type="text",placeholder="Side 2",name="blue")
     
-    if (comparitive === false)
-      input#inputRedName(type="hidden",value="For",name="redname")
-      input#inputBlueName(type="hidden",value="Against",name="redname")
-      
     p
       input#inputUser(type="hidden",value="#{user._id}",name="user")
-    p
-      input#inputRed(type="hidden",value)
+    
     
     p
       button#btnSubmit(type="submit") Start Debate
+      
+  
+  script.
+    function compOptionsVisible() {
+       var d = document.getElementById("comparitiveOptions");
+       if(d.style.display == 'block' ) {
+         d.style.display = 'none';
+       } else if (d.style.display == 'none') {
+         d.style.display = 'block'
+       }  else {
+         d.style.display = 'none';
+       };
+       var redin = document.getElementById("inputRed");
+       var bluein = document.getElementById("inputBlue");
+       if(inputComparitive.checked){
+         redin.value = " ";
+         bluein.value = " ";
+       } else {
+         redin.value = "For";
+         bluein.value = "Against";
+       }
+
+     };
+
+    document.getElementById("inputComparitive").addEventListener("change", compOptionsVisible);
