@@ -13,3 +13,78 @@
   background-color: #333333;
   color: #fff;
 }
+
+.addItem{
+  width: 60%;
+  height: 250px;
+  border:solid;
+  background: rgba(255,255,255,0.6);
+  margin: 0 auto 0 auto;
+  z-index: 2;
+
+}
+  [draggable=true]{
+    cursor: move;
+  }
+
+.debateContainer {
+  width: 90%;
+  height: auto;
+  margin: 0 auto 0 auto;
+
+}
+  .debateTop {
+    width: 100%;
+    height: 60px;
+    border-bottom: solid;
+
+  }
+    #redscore {
+      width:25%;
+      height: 60px;
+      float: left;
+    }
+    #red {
+      width:25%;
+      height: 60px;
+      border-right: solid;
+      float: left;
+
+    }
+    #bluescore{
+      width:25%;
+      height: 60px;
+      float: right;
+
+    }
+    #blue{
+      width:25%;
+      height: 60px;
+      float: right;
+      border-left: solid;
+
+    }
+
+  .debateContent{
+    width: 100%;
+    height: auto;
+  }
+    .side {
+      width: 50%;
+      height: auto;
+    }
+      #redside {
+        float:left;
+        border-right: solid;
+
+      }
+      #blueside {
+        float:right;
+        border-left: solid;
+
+      }
+
+.space{
+  width: 100%;
+  height: 150px;
+}

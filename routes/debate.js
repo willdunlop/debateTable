@@ -4,8 +4,7 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var debateMod = require('../models/debate');
-var redMod = require('../models/red');
-var blueMod = require('../models/blue');
+var itemMod = require('../models/item');
 
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(methodOverride(function(req, res) {
@@ -62,7 +61,6 @@ router.route('/')
     var blue = req.body.blue;
     var user = req.user;
     //red and blue values
-
 
     var newDebate = new debateMod({
       topic: topic,
@@ -136,6 +134,7 @@ router.param('id', function(req, res, next, id) {
 //Set up view for individual debate
 router.route('/:id')
   .get(function(req, res) {
+
     mongoose.model('Debate').findById(req.id, function(err, debate){
       if (err) {
         console.log('GET: There was an issue retrieving: ' + err);
@@ -145,11 +144,51 @@ router.route('/:id')
           html:function(){
             res.render('debates/show', {
               "debate" : debate,
-              title: debate.topic
+              title: debate.topic,
+              user: req.user
             });
           },
           json: function(){
             res.json(debate);
+          }
+        });
+      }
+    });
+  });
+  //Ability to add an item
+  router.route('/item') .post(function(req,res){
+    var title = req.body.title;
+    var claim = req.body.claim;
+    var source = req.body.source;
+    var red_blue = req.body.red_blue;
+    var debate = req.body.debate
+    var user = req.user;
+
+    var newItem = new itemMod({
+      title: title,
+      claim: claim,
+      source: source,
+      red_blue: red_blue,
+      debate: debate,
+      user: user
+    });
+    newItem.save(function(err, item){
+      if(err){
+        return callback(err);
+      } else {
+        itemMod.findone(item).populate('user').exec(function(err,item){
+          if(err) {
+            return callback(err);
+          } else {
+            console.log('POST: Creating new item: ' + item);
+            res.format({
+              html: function(){
+              res.redirect("/debates");
+              },
+              json: function(){
+                res.json(item);
+              }
+            });
           }
         });
       }

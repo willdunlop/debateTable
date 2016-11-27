@@ -4,15 +4,86 @@ block content
   h1.
     #{title}
     
-    
+  div#aiTop.addItem(style="display: none;")
+    form#formAddItem(name="additem",method="post",action="/debates/:id")
+      p Title: 
+        input#inputTitle(type="text",placeholder="Title",name="title")
+      p Claim: 
+        input#inputClaim(type="text",placeholder="Claim",name="claim")
+      p Source: 
+        input#inputSource(type="text",placeholder="Source",name="source")
+      p Left or Right?
+        input#inputRed_Blue(type="checkbox",name="red_blue")
+      p
+        input#inputDebate(type="hidden",value="#{debate._id}",name="debate")
+      
+      if(user)
+        p
+          input#inputUserItem(type="hidden",value="#{user._id}",name="user")
+      p
+        button#btnSubmit(type="submit") Support Argument
+  
+  if(user)
+    btn.btn.btn-warning#contributeButtonTop(type="button") Contribute
+  if(!user)
+    h4 Log in if you would like to contribute
+  p
   div.debateContainer
     div.debateTop
-    div#red.debateSide
-      p #{debate.red}
+      div#redscore
+        h5 score
+      div#red.debateSide        
+        h4 #{debate.red}
         
-    div#blue.debateSide
-      h4 #{debate.blue}
+      div#bluescore
+        h5 score
+      div#blue.debateSide
+        h4 #{debate.blue}
       
-      
+    div.debateContent
+      div#redside.side
+        p content
+        p content
+        p content
+        p content
+        
 
-      
+      div#blueside.side
+        p content
+        p content
+        p content
+        p content
+  
+  div.space
+  div#aiBot.addItem(style="display: none;")
+  
+  if(user)
+    btn.btn.btn-warning#contributeButtonBot(type="button") Contribute
+  
+  script.
+    function addItemRevealTop() {
+       var i = document.getElementById("aiTop");
+       if(i.style.display == 'block' ) {
+         i.style.display = 'none';
+       } else if (i.style.display == 'none') {
+         i.style.display = 'block'
+       }  else {
+         i.style.display = 'none';
+       };
+    };
+    function addItemRevealBot() {
+       var i = document.getElementById("aiBot");
+       if(i.style.display == 'block' ) {
+         i.style.display = 'none';
+       } else if (i.style.display == 'none') {
+         i.style.display = 'block'
+       }  else {
+         i.style.display = 'none';
+       };
+    };
+
+    document.getElementById("contributeButtonTop").addEventListener("click", addItemRevealTop);
+    
+    document.getElementById("contributeButtonBot").addEventListener("click", addItemRevealBot);
+    
+    

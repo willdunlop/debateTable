@@ -16,6 +16,9 @@ var Item = new Schema({
   comment: [
     {type: Schema.Types.ObjectId, ref: 'Comment'}
   ],
+  debate: [
+    {type: Schema.Types.ObjectId, ref: 'Debate'}
+  ],
   user: [
     {type: Schema.Types.ObjectId, ref: 'Account'}
   ]

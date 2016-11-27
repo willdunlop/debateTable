@@ -17,9 +17,7 @@ var Debate = new Schema({
   blue: {
     type: String, default: 'Against'
   },
-  item: [
-    {type: Schema.Types.ObjectId, ref: 'Item'}
-  ]
+  
 
 });
 
