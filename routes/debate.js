@@ -136,31 +136,44 @@ router.route('/:id')
   .get(function(req, res) {
 
     mongoose.model('Debate').findById(req.id, function(err, debate){
-      if (err) {
-        console.log('GET: There was an issue retrieving: ' + err);
-      } else {
-        console.log('GET: Retrieving debate: ' + debate._id);
-        res.format({
-          html:function(){
-            res.render('debates/show', {
-              "debate" : debate,
-              title: debate.topic,
-              user: req.user
+      mongoose.model('Item').find({}).populate('user').exec(function(err, items){
+        if (err) {
+          console.log('GET: There was an issue retrieving: ' + err);
+        } else {
+          mongoose.model('Item').populate(items, {
+            path: 'user',
+            model: 'Account'
+          }, function(err, items){
+            if(err){
+              console.log(err);
+            } else {
+            console.log('GET: Retrieving debate: ' + debate._id);
+            res.format({
+              html:function(){
+                res.render('debates/show', {
+                  "debate" : debate,
+                  title: debate.topic,
+                  "items" : items,
+                  user: req.user
+                });
+              },
+              json: function(){
+                res.json(debate);
+              }
             });
-          },
-          json: function(){
-            res.json(debate);
           }
         });
       }
     });
   });
+})
+
   //Ability to add an item
-  router.route('/item') .post(function(req,res){
+   .post(function(req,res){
     var title = req.body.title;
     var claim = req.body.claim;
     var source = req.body.source;
-    var red_blue = req.body.red_blue;
+    var redblue = req.body.redblue;
     var debate = req.body.debate
     var user = req.user;
 
@@ -168,7 +181,7 @@ router.route('/:id')
       title: title,
       claim: claim,
       source: source,
-      red_blue: red_blue,
+      redblue: redblue,
       debate: debate,
       user: user
     });
@@ -176,17 +189,17 @@ router.route('/:id')
       if(err){
         return callback(err);
       } else {
-        itemMod.findone(item).populate('user').exec(function(err,item){
+        itemMod.findOne(item).populate('user').exec(function(err,item){
           if(err) {
             return callback(err);
           } else {
             console.log('POST: Creating new item: ' + item);
             res.format({
               html: function(){
-              res.redirect("/debates");
+                res.redirect("/debates/#{debate._id}");
               },
-              json: function(){
-                res.json(item);
+                json: function(){
+                  res.json(item);
               }
             });
           }

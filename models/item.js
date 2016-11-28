@@ -11,8 +11,7 @@ var Item = new Schema({
     required: true
   },
   source: String,
-  upvote: Number,
-  red_blue: Boolean,
+  redblue: Boolean,
   comment: [
     {type: Schema.Types.ObjectId, ref: 'Comment'}
   ],

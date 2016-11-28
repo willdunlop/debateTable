@@ -5,7 +5,7 @@ block content
     #{title}
     
   div#aiTop.addItem(style="display: none;")
-    form#formAddItem(name="additem",method="post",action="/debates/:id")
+    form#formAddItem(name="additem",method="post",action="/debates/#{debate._id}")
       p Title: 
         input#inputTitle(type="text",placeholder="Title",name="title")
       p Claim: 
@@ -13,7 +13,7 @@ block content
       p Source: 
         input#inputSource(type="text",placeholder="Source",name="source")
       p Left or Right?
-        input#inputRed_Blue(type="checkbox",name="red_blue")
+        input#inputRedBlue(type="checkbox",name="redblue")
       p
         input#inputDebate(type="hidden",value="#{debate._id}",name="debate")
       
@@ -42,21 +42,42 @@ block content
       
     div.debateContent
       div#redside.side
-        p content
-        p content
-        p content
-        p content
-        
-
+        ul.redItems
+          - each item, i in items
+            if(item.debate.toString() == debate._id)
+              if(item.redblue === true)
+                div.eaitem#eaitems
+                  p
+                    = item.title
+                  p
+                    = item.claim
+                  p
+                    = item.source 
+                  p Posted By:
+                    = item.user[0].username
+                  p
+                    button.btn.brtn-default(type="button") Comment
+              
       div#blueside.side
-        p content
-        p content
-        p content
-        p content
-  
+        ul.blueItems
+          - each item, i in items
+            if(item.debate == debate._id)
+              if(item.redblue === false)
+                div.eaitem#eaitems
+                  p
+                    = item.title
+                  p
+                    = item.claim
+                  p
+                    = item.source 
+                  p Posted By:
+                    = item.user[0].username
+                  button.btn.brtn-default(type="button") Comment
+          
   div.space
   div#aiBot.addItem(style="display: none;")
   
+
   if(user)
     btn.btn.btn-warning#contributeButtonBot(type="button") Contribute
   
