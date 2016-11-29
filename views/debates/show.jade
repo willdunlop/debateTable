@@ -4,8 +4,13 @@ block content
   h1.
     #{title}
     
+  if(user)
+    btn.btn.btn-warning#contributeButtonTop(type="button") Contribute
+  if(!user)
+    h4 Log in if you would like to contribute  
   div#aiTop.addItem(style="display: none;")
     form#formAddItem(name="additem",method="post",action="/debates/#{debate._id}")
+      p
       p Title: 
         input#inputTitle(type="text",placeholder="Title",name="title")
       p Claim: 
@@ -23,10 +28,7 @@ block content
       p
         button#btnSubmit(type="submit") Support Argument
   
-  if(user)
-    btn.btn.btn-warning#contributeButtonTop(type="button") Contribute
-  if(!user)
-    h4 Log in if you would like to contribute
+  
   p
   div.debateContainer
     div.debateTop
@@ -56,13 +58,13 @@ block content
                   p Posted By:
                     = item.user[0].username
                   p
-                    button.btn.brtn-default(type="button") Comment
+                    button.btn.btn-default(type="button") Comment
               
       div#blueside.side
         ul.blueItems
           - each item, i in items
-            if(item.debate == debate._id)
-              if(item.redblue === false)
+            if(item.debate.toString() == debate._id)
+              if(item.redblue == null)
                 div.eaitem#eaitems
                   p
                     = item.title
@@ -72,14 +74,15 @@ block content
                     = item.source 
                   p Posted By:
                     = item.user[0].username
-                  button.btn.brtn-default(type="button") Comment
+                  p
+                    button.btn.btn-default(type="button") Comment
           
   div.space
-  div#aiBot.addItem(style="display: none;")
-  
-
-  if(user)
-    btn.btn.btn-warning#contributeButtonBot(type="button") Contribute
+  footer.footer#footerid
+    div#aiBot.addItem(style="display: none;")
+    
+    if(user)
+      btn.btn.btn-warning#contributeButtonBot(type="button") Contribute
   
   script.
     function addItemRevealTop() {
