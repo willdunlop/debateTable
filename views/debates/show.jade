@@ -17,8 +17,11 @@ block content
         input#inputClaim(type="text",placeholder="Claim",name="claim")
       p Source: 
         input#inputSource(type="text",placeholder="Source",name="source")
-      p Left or Right?
-        input#inputRedBlue(type="checkbox",name="redblue")
+      div.formbools  
+        div.redleft Left 
+          input#inputRedBlue(type="radio",name="redblue",value="left") 
+        div.blueright Right
+          input#inputRedBlue(type="radio",name="redblue",value="right") 
       p
         input#inputDebate(type="hidden",value="#{debate._id}",name="debate")
       
@@ -47,7 +50,7 @@ block content
         ul.redItems
           - each item, i in items
             if(item.debate.toString() == debate._id)
-              if(item.redblue === true)
+              if(item.redblue === "left")
                 div.eaitem#eaitems
                   p
                     = item.title
@@ -64,7 +67,7 @@ block content
         ul.blueItems
           - each item, i in items
             if(item.debate.toString() == debate._id)
-              if(item.redblue == null)
+              if(item.redblue === "right")
                 div.eaitem#eaitems
                   p
                     = item.title
@@ -105,6 +108,7 @@ block content
          i.style.display = 'none';
        };
     };
+    
 
     document.getElementById("contributeButtonTop").addEventListener("click", addItemRevealTop);
     

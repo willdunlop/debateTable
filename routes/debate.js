@@ -187,11 +187,19 @@ router.route('/:id')
     });
     newItem.save(function(err, item){
       if(err){
-        return callback(err);
+        console.log(err);
+        res.render("error", {
+          message: "An error occured",
+          error: err
+        });
       } else {
         itemMod.findOne(item).populate('user').exec(function(err,item){
           if(err) {
-            return callback(err);
+            console.log(err);
+            res.render("error", {
+              message: "An error occured",
+              error: err
+            });
           } else {
             console.log('POST: Creating new item: ' + item);
             res.format({

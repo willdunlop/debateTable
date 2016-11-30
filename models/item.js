@@ -11,7 +11,7 @@ var Item = new Schema({
     required: true
   },
   source: String,
-  redblue: Boolean,
+  redblue: String,
   comment: [
     {type: Schema.Types.ObjectId, ref: 'Comment'}
   ],

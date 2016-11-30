@@ -9,9 +9,11 @@
   height: auto;
 }
 
+
 .eaitem {
   background-color: #333333;
   color: #fff;
+  margin: 0 auto 0 auto;
 }
 
 .addItem{
@@ -100,3 +102,22 @@
 #footerid{
   padding-top: 10px;
 }
+
+#inputRedBlue {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.formbools {
+  width: 180px;
+  height: 50px;
+  margin:0 auto 0 auto;
+}
+  .redleft {
+    width: 90px;
+    float: left;
+  }
+  .blueright {
+    width: 90px;
+    float: left;
+  }
