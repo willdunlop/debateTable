@@ -33,59 +33,79 @@ block content
   
   
   p
-  div.debateContainer
-    div.debateTop
-      div#redscore
-        h5 score
-      div#red.debateSide        
-        h4 #{debate.red}
-        
-      div#bluescore
-        h5 score
-      div#blue.debateSide
-        h4 #{debate.blue}
+  div.debateTop
+    div#redscore
+      h5 score
+    div#red.debateSide        
+      h4 #{debate.red}
       
-    div.debateContent
-      div#redside.side
-        ul.redItems
-          - each item, i in items
-            if(item.debate.toString() == debate._id)
-              if(item.redblue === "left")
-                div.eaitem#eaitems
-                  p
-                    = item.title
-                  p
-                    = item.claim
-                  p
-                    = item.source 
-                  p Posted By:
-                    = item.user[0].username
-                  p
-                    button.btn.btn-default(type="button") Comment
-              
-      div#blueside.side
-        ul.blueItems
-          - each item, i in items
-            if(item.debate.toString() == debate._id)
-              if(item.redblue === "right")
-                div.eaitem#eaitems
-                  p
-                    = item.title
-                  p
-                    = item.claim
-                  p
-                    = item.source 
-                  p Posted By:
-                    = item.user[0].username
-                  p
-                    button.btn.btn-default(type="button") Comment
-          
-  div.space
-  footer.footer#footerid
-    div#aiBot.addItem(style="display: none;")
+    div#bluescore
+      h5 score
+    div#blue.debateSide
+      h4 #{debate.blue}
     
-    if(user)
-      btn.btn.btn-warning#contributeButtonBot(type="button") Contribute
+  div.debateContent
+    div#redside.side
+      div.redItems
+        - each item, i in items
+          if(item.debate.toString() == debate._id)
+            if(item.redblue === "left")
+              div.eaitem#eaitems
+                p
+                  = item.title
+                p
+                  = item.claim
+                p
+                  = item.source 
+                p Posted By:
+                  = item.user[0].username
+                p
+                  button.btn.btn-default(type="button") Comment
+            
+    div#blueside.side
+      div.blueItems
+        - each item, i in items
+          if(item.debate.toString() == debate._id)
+            if(item.redblue === "right")
+              div.eaitem#eaitems
+                p
+                  = item.title
+                p
+                  = item.claim
+                p
+                  = item.source 
+                p Posted By:
+                  = item.user[0].username
+                p
+                  button.btn.btn-default(type="button") Comment
+        
+  div.space  
+  if(user)
+    btn.btn.btn-warning#contributeButtonBot(type="button") Contribute
+    
+  div#aiBot.addItem(style="display: none;")
+    form#formAddItem(name="additem",method="post",action="/debates/#{debate._id}")
+      p
+      p Title: 
+        input#inputTitle(type="text",placeholder="Title",name="title")
+      p Claim: 
+        input#inputClaim(type="text",placeholder="Claim",name="claim")
+      p Source: 
+        input#inputSource(type="text",placeholder="Source",name="source")
+      div.formbools  
+        div.redleft Left 
+          input#inputRedBlue(type="radio",name="redblue",value="left") 
+        div.blueright Right
+          input#inputRedBlue(type="radio",name="redblue",value="right") 
+      p
+        input#inputDebate(type="hidden",value="#{debate._id}",name="debate")
+      
+      if(user)
+        p
+          input#inputUserItem(type="hidden",value="#{user._id}",name="user")
+      p
+        button#btnSubmit(type="submit") Support Argument
+
   
   script.
     function addItemRevealTop() {

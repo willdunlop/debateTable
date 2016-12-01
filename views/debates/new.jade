@@ -25,6 +25,7 @@ block content
   
   script.
     function compOptionsVisible() {
+      
        var d = document.getElementById("comparitiveOptions");
        if(d.style.display == 'block' ) {
          d.style.display = 'none';
@@ -44,5 +45,14 @@ block content
        }
 
      };
-
+     
+     function comparitiveSet(){
+       var redin = document.getElementById("inputRed");
+       var bluein = document.getElementById("inputBlue");
+       redin.value = "For";
+       bluein.value = "Against";
+     };
+     
     document.getElementById("inputComparitive").addEventListener("change", compOptionsVisible);
+    
+    document.onload = comparitiveSet()
