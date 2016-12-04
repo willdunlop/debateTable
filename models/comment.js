@@ -5,6 +5,9 @@ var Comment = new Schema ({
   author: [
     {type: Schema.Types.ObjectId, ref: 'Account'}
   ],
+  item: [
+    {type: Schema.Types.ObjectId, ref: 'Item'}
+  ],
   comment: String
 });
 

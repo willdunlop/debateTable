@@ -205,7 +205,7 @@ router.route('/:id')
             console.log('POST: Creating new item: ' + item);
             res.format({
               html: function(){
-                res.redirect("/debates/" + debate._id);
+                res.redirect("/debates/" + item.debate);
               },
                 json: function(){
                   res.json(item);
@@ -217,44 +217,48 @@ router.route('/:id')
     });
   })
   //POST a comment for each item
-  // .post(function(req, res){
-  //   var comment = req.body.comment;
-  //   var author = req.user;
-  //
-  //   var newComment = new commentMod({
-  //     comment: comment,
-  //     author: author
-  //   });
-  //   newComment.save(function(err, comment){
-  //     if (err){
-  //       console.log(err);
-  //       res.render("error", {
-  //         message: "Error!",
-  //         error: err
-  //       });
-  //     } else {
-  //       newComment.findOne(comment).populate('user').exec(function(err,comment){
-  //         if(err) {
-  //           console.log(err);
-  //           res.render("error", {
-  //             message: "Error!",
-  //             error: err
-  //           });
-  //         } else {
-  //           console.log('POST: Creating new comment: ' + comment);
-  //           res.format({
-  //             html: function(){
-  //               res.redirect("/debates");
-  //             },
-  //             json: function(){
-  //               res.json(comment);
-  //             }
-  //           });
-  //         }
-  //       });
-  //     }
-  //   });
-  // });
+  .post(function(req, res){
+    var comment = req.body.comment;
+    var author = req.user;
+    var item = req.body.item;
+
+    var newComment = new commentMod({
+      comment: comment,
+      author: author,
+      item: item
+    });
+    newComment.save(function(err, comment){
+      if (err){
+        console.log(err);
+        res.render("error", {
+          message: "Error!",
+          error: err
+        });
+      } else {
+        newComment.findOne(comment).populate('author', 'item').exec(function(err,comment){
+          if(err) {
+            console.log(err);
+            res.render("error", {
+              message: "Error!",
+              error: err
+            });
+          } else {
+            console.log('POST: Creating new comment: ' + comment);
+            res.format({
+              html: function(){
+                res.redirect("/debates" + debate._id, {
+                  "comment" : comment
+                });
+              },
+              json: function(){
+                res.json(comment);
+              }
+            });
+          }
+        });
+      }
+    });
+  });
 
 //GET the debates edit page
 router.get('/:id/edit', function(req, res){

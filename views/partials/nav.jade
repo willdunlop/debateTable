@@ -15,7 +15,7 @@ mixin nav(name, id, style)
       ul.nav.navbar-nav
         +nav_item( "/", "active" ) Home
         +nav_item( "/debates", "other" ) Debates
-        +nav_item( "contact.html", "other" ) Contact
+        
       ul.nav.navbar-nav.navbar-right
         if (!user)
           +nav_item( "/login", "other" ) Login

@@ -30,6 +30,31 @@ router.post('/register', function(req, res) {
     });
 });
 
+// router.put('/settings', function(req,res){
+//   var username = req.body.username;
+//   var password = req.body.password;
+//
+//   mongoose.model('Account').findById(req.user._id, function(err, account) {
+//     account.update({
+//       username: username,
+//       password: password
+//     }, function(err, accountID){
+//       if (err) {
+//         res.send("There was an error: " + err);
+//       } else {
+//         res.format({
+//           html: function(){
+//             res.redirect("/");
+//           },
+//           json: function(){
+//             res.json(account);
+//           }
+//         });
+//       }
+//     })
+//   });
+// });
+
 router.get('/login', function(req, res) {
     res.render('account/login', { user : req.user });
 });

@@ -80,7 +80,7 @@ block content
                       p Comments have yet to be fully integrated
                       p Thank you for your patience
                     p
-                      button.btn.btn-primary#sendComment(type="button") Send
+                      button.btn.btn-primary#sendComment(type="submit") Send
                                     
                 div.eacomment
             
@@ -114,7 +114,7 @@ block content
                       p Comments have yet to be fully integrated
                       p Thank you for your patience
                     p
-                      button.btn.btn-primary#sendComment(type="button") Send
+                      //- button.btn.btn-primary#sendComment(type="submit") Send
                       
     script.
       function addCommentReveal() {
@@ -141,7 +141,7 @@ block content
       
         document.getElementById("commentButton").addEventListener("click", addCommentReveal);
           
-        document.getElementById("sendComment").addEventListener("click", comingSoon);
+        //- document.getElementById("sendComment").addEventListener("click", comingSoon);
               
   div.space  
   if(user)
