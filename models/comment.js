@@ -3,9 +3,11 @@ var Schema = mongoose.Schema;
 
 var Comment = new Schema ({
   author: [
-    {type: Schem.Type.ObjectId, ref: 'Account'}
+    {type: Schema.Types.ObjectId, ref: 'Account'}
   ],
   comment: String
 });
+
+// Comment.plugin(voting, {ref: 'Account'});
 
 module.exports = mongoose.model('Comment', Comment);

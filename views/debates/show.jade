@@ -43,7 +43,13 @@ block content
       h5 score
     div#blue.debateSide
       h4 #{debate.blue}
-    
+  
+  div.commentComingSoon(style="margin: 0 auto 0 auto; text-align: center; color: rgb(100,100,100);")
+    p 
+      i A commenting feature is still under construction
+    p 
+      i sorry for the inconvenience
+  
   div.debateContent
     div#redside.side
       div.redItems
@@ -60,7 +66,23 @@ block content
                 p Posted By:
                   = item.user[0].username
                 p
-                  button.btn.btn-default(type="button") Comment
+                  //- button.btn.btn-default#commentButton(type="button") Comment
+                div#commentForm(style="display: none;")
+                  form#formAddComment(name="addcomment",method="post",action="/debates/#{debate._id}")
+                    p
+                    p Comment: 
+                      input#inputComment(type="text",placeholder="Add your comment",style="color: rgb(0,0,0);",name="comment")
+                      
+                    if(user)
+                      p
+                        input#inputUserComment(type="hidden",value="#{user._id}",name="author")
+                    div#commentSoon(style="display: none;")
+                      p Comments have yet to be fully integrated
+                      p Thank you for your patience
+                    p
+                      button.btn.btn-primary#sendComment(type="button") Send
+                                    
+                div.eacomment
             
     div#blueside.side
       div.blueItems
@@ -77,8 +99,50 @@ block content
                 p Posted By:
                   = item.user[0].username
                 p
-                  button.btn.btn-default(type="button") Comment
-        
+                  //- button.btn.btn-default#commentButton(type="button") Comment
+                  
+                div#commentForm(style="display: none;")
+                  form#formAddComment(name="addcomment",method="post",action="/debates/#{debate._id}")
+                    p
+                    p Comment: 
+                      input#inputComment(type="text",placeholder="Add your comment",style="color: rgb(0,0,0);",name="comment")
+                      
+                    if(user)
+                      p
+                        input#inputUserComment(type="hidden",value="#{user._id}",name="author")
+                    div#commentSoon(style="display: none;")
+                      p Comments have yet to be fully integrated
+                      p Thank you for your patience
+                    p
+                      button.btn.btn-primary#sendComment(type="button") Send
+                      
+    script.
+      function addCommentReveal() {
+         var i = document.getElementById("commentForm");
+         if(i.style.display == 'block' ) {
+           i.style.display = 'none';
+         } else if (i.style.display == 'none') {
+           i.style.display = 'block'
+         }  else {
+           i.style.display = 'none';
+         };
+      };
+      
+      function comingSoon() {
+         var i = document.getElementById("commentSoon");
+         if(i.style.display == 'block' ) {
+           i.style.display = 'none';
+         } else if (i.style.display == 'none') {
+           i.style.display = 'block'
+         }  else {
+           i.style.display = 'none';
+         };
+      };
+      
+        document.getElementById("commentButton").addEventListener("click", addCommentReveal);
+          
+        document.getElementById("sendComment").addEventListener("click", comingSoon);
+              
   div.space  
   if(user)
     btn.btn.btn-warning#contributeButtonBot(type="button") Contribute

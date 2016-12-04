@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var debateMod = require('../models/debate');
 var itemMod = require('../models/item');
+var commentMod = require('../models/comment');
 
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(methodOverride(function(req, res) {
@@ -204,7 +205,7 @@ router.route('/:id')
             console.log('POST: Creating new item: ' + item);
             res.format({
               html: function(){
-                res.redirect("/debates/#{debate._id}");
+                res.redirect("/debates/" + debate._id);
               },
                 json: function(){
                   res.json(item);
@@ -214,7 +215,46 @@ router.route('/:id')
         });
       }
     });
-  });
+  })
+  //POST a comment for each item
+  // .post(function(req, res){
+  //   var comment = req.body.comment;
+  //   var author = req.user;
+  //
+  //   var newComment = new commentMod({
+  //     comment: comment,
+  //     author: author
+  //   });
+  //   newComment.save(function(err, comment){
+  //     if (err){
+  //       console.log(err);
+  //       res.render("error", {
+  //         message: "Error!",
+  //         error: err
+  //       });
+  //     } else {
+  //       newComment.findOne(comment).populate('user').exec(function(err,comment){
+  //         if(err) {
+  //           console.log(err);
+  //           res.render("error", {
+  //             message: "Error!",
+  //             error: err
+  //           });
+  //         } else {
+  //           console.log('POST: Creating new comment: ' + comment);
+  //           res.format({
+  //             html: function(){
+  //               res.redirect("/debates");
+  //             },
+  //             json: function(){
+  //               res.json(comment);
+  //             }
+  //           });
+  //         }
+  //       });
+  //     }
+  //   });
+  // });
 
 //GET the debates edit page
 router.get('/:id/edit', function(req, res){
