@@ -9,6 +9,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 
+
 // Route variables
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -20,6 +21,8 @@ var db = require('./models/db');
 //var account = require('./models/accounts');
 
 var app = express();
+
+// var io = require('socket.io').listen();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

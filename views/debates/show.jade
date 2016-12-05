@@ -70,7 +70,7 @@ block content
                   b Posted By: 
                   = item.user[0].username
                 p
-                  //- button.btn.btn-default#commentButton(type="button") Comment
+                  button.btn.btn-default#commentButton(type="button") Comment
                 div#commentForm(style="display: none;")
                   form#formAddComment(name="addcomment",method="post",action="/debates/#{debate._id}")
                     p
@@ -84,7 +84,7 @@ block content
                       p Comments have yet to be fully integrated
                       p Thank you for your patience
                     p
-                      button.btn.btn-primary#sendComment(type="submit") Send
+                      button.btn.btn-primary#sendComment(type="button") Send
                                     
                 div.eacomment
             
@@ -107,7 +107,7 @@ block content
                   b Posted By: 
                   = item.user[0].username
                 p
-                  //- button.btn.btn-default#commentButton(type="button") Comment
+                  button.btn.btn-default#commentButton(type="button") Comment
                   
                 div#commentForm(style="display: none;")
                   form#formAddComment(name="addcomment",method="post",action="/debates/#{debate._id}")
@@ -122,7 +122,7 @@ block content
                       p Comments have yet to be fully integrated
                       p Thank you for your patience
                     p
-                      //- button.btn.btn-primary#sendComment(type="submit") Send
+                      button.btn.btn-primary#sendComment(type="button") Send
                       
     script.
       function addCommentReveal() {
@@ -149,7 +149,7 @@ block content
       
         document.getElementById("commentButton").addEventListener("click", addCommentReveal);
           
-        //- document.getElementById("sendComment").addEventListener("click", comingSoon);
+        document.getElementById("sendComment").addEventListener("click", comingSoon);
               
   div.space  
   if(user)

@@ -160,3 +160,9 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+/*#commentForm {
+  margin: 0 auto 0 auto;
+  position: fixed;
+  z-index: 5;
+}*/
