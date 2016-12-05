@@ -50,6 +50,11 @@ a {
   background-color: #d75700;
 }
 
+.btn {
+  box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.3);
+  border: thin solid rgb(180,180,180);
+
+}
 .logo {
   background-image: url('../images/logo-yell-small.jpg');
   background-size: contain;

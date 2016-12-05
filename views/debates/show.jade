@@ -57,13 +57,17 @@ block content
           if(item.debate.toString() == debate._id)
             if(item.redblue === "left")
               div.eaitem#eaitems
+                p(style="color: #6655A6;")
+                  b 
+                    = item.title
                 p
-                  = item.title
-                p
+                  b Claim: 
                   = item.claim
                 p
+                  b Source: 
                   = item.source 
-                p Posted By:
+                p 
+                  b Posted By: 
                   = item.user[0].username
                 p
                   //- button.btn.btn-default#commentButton(type="button") Comment
@@ -90,13 +94,17 @@ block content
           if(item.debate.toString() == debate._id)
             if(item.redblue === "right")
               div.eaitem#eaitems
+                p(style="color: #6655A6;")
+                  b 
+                    = item.title
                 p
-                  = item.title
-                p
+                  b Claim: 
                   = item.claim
                 p
+                  b Source: 
                   = item.source 
-                p Posted By:
+                p 
+                  b Posted By: 
                   = item.user[0].username
                 p
                   //- button.btn.btn-default#commentButton(type="button") Comment

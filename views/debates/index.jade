@@ -6,21 +6,29 @@ block content
   
   if(user)
     a(href='/debates/new')
-      button.btn.btn-primary(type='button') Begin a Debate
+      button.btn.btn-default(type='button') Begin a Debate
   if(!user)
     h4 Please log in to start a debate
   br
   br
   br
-  ul.alldebates
+  div.alldebates
     - each debate, i in debates
       div.eaitem#eadebate
+        div.dindexLeft
+          = debate.red 
+        
+        div.dindexRight
+          = debate.blue
+          
         p Topic: 
           = debate.topic
         p Type: 
           = debate.comparitive
         p Created by: 
           = debate.user[0].username
+        
+        
           
         p  
           a(href='/debates/#{debate._id}') 

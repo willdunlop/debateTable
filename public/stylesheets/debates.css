@@ -9,13 +9,30 @@
   height: auto;
 }
 
+.dindexLeft{
+  float: left;
+  margin: 10px 0 0 10px;
+  font-size: 16px;
+  height:100%;
+
+}
+
+.dindexRight{
+  float: right;
+  margin: 10px 10px 0 0;
+  font-size: 16px;
+  height:100%;
+
+}
+
 
 .eaitem {
-  background-color: #6688b6;
-  color: #fff;
+  background-color: #BAB2FF;
+  color: rgb(50,50,50);
   margin: 10px auto 10px auto;
   padding: 1%;
   width: 90%;
+  box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.5);
 }
 
 .addItem{
