@@ -138,34 +138,36 @@ router.route('/:id')
 
     mongoose.model('Debate').findById(req.id, function(err, debate){
       mongoose.model('Item').find({}).populate('user').exec(function(err, items){
-        if (err) {
-          console.log('GET: There was an issue retrieving: ' + err);
-        } else {
-          mongoose.model('Item').populate(items, {
-            path: 'user',
-            model: 'Account'
-          }, function(err, items){
-            if(err){
-              console.log(err);
-            } else {
-            console.log('GET: Retrieving debate: ' + debate._id);
-            res.format({
-              html:function(){
-                res.render('debates/show', {
-                  "debate" : debate,
-                  title: debate.topic,
-                  "items" : items,
-                  user: req.user
-                });
-              },
-              json: function(){
-                res.json(debate);
-              }
-            });
-          }
-        });
-      }
-    });
+        mongoose.model('Comment').find({}).exec(function(err, comments){
+          if (err) {
+            console.log('GET: There was an issue retrieving: ' + err);
+          } else {
+            mongoose.model('Item').populate(items, {
+              path: 'user',
+              model: 'Account'
+            }, function(err, items){
+              if(err){
+                console.log(err);
+              } else {
+              console.log('GET: Retrieving debate: ' + debate._id);
+              res.format({
+                html:function(){
+                  res.render('debates/show', {
+                    "debate" : debate,
+                    title: debate.topic,
+                    "items" : items,
+                    user: req.user
+                  });
+                },
+                json: function(){
+                  res.json(debate);
+                }
+              });
+            }
+          });
+        }
+      });
+    })
   });
 })
 

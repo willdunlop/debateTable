@@ -72,14 +72,16 @@ block content
                 p
                   button.btn.btn-default#commentButton(type="button") Comment
                 div#commentForm(style="display: none;")
-                  form#formAddComment(name="addcomment",method="post",action="/debates/#{debate._id}")
+                  form#formAddComment(name="addcomment",method="post",action="/debates/#{item.debate}")
                     p
                     p Comment: 
-                      input#inputComment(type="text",placeholder="Add your comment",style="color: rgb(0,0,0);",name="comment")
+                      input#inputComment(type="text",placeholder="Add your comment",name="comment")
                       
                     if(user)
                       p
-                        input#inputUserComment(type="hidden",value="#{user._id}",name="author")
+                        input#inputAuthor(type="hidden",value="#{user._id}",name="author")
+                      p
+                        input#inputItem(type="hidden",value="#{item}",name="item")
                     div#commentSoon(style="display: none;")
                       p Comments have yet to be fully integrated
                       p Thank you for your patience
@@ -106,23 +108,23 @@ block content
                 p 
                   b Posted By: 
                   = item.user[0].username
-                p
-                  button.btn.btn-default#commentButton(type="button") Comment
-                  
-                div#commentForm(style="display: none;")
-                  form#formAddComment(name="addcomment",method="post",action="/debates/#{debate._id}")
-                    p
-                    p Comment: 
-                      input#inputComment(type="text",placeholder="Add your comment",style="color: rgb(0,0,0);",name="comment")
-                      
-                    if(user)
-                      p
-                        input#inputUserComment(type="hidden",value="#{user._id}",name="author")
-                    div#commentSoon(style="display: none;")
-                      p Comments have yet to be fully integrated
-                      p Thank you for your patience
-                    p
-                      button.btn.btn-primary#sendComment(type="button") Send
+                //- p
+                //-   button.btn.btn-default#commentButton(type="button") Comment
+                //-   
+                //- div#commentForm(style="display: none;")
+                //-   form#formAddComment(name="addcomment",method="post",action="/debates/#{debate._id}")
+                //-     p
+                //-     p Comment: 
+                //-       input#inputComment(type="text",placeholder="Add your comment",style="color: rgb(0,0,0);",name="comment")
+                //-       
+                //-     if(user)
+                //-       p
+                //-         input#inputUserComment(type="hidden",value="#{user._id}",name="author")
+                //-     div#commentSoon(style="display: none;")
+                //-       p Comments have yet to be fully integrated
+                //-       p Thank you for your patience
+                //-     p
+                //-       button.btn.btn-primary#sendComment(type="button") Send
                       
     script.
       function addCommentReveal() {
@@ -149,7 +151,9 @@ block content
       
         document.getElementById("commentButton").addEventListener("click", addCommentReveal);
           
-        document.getElementById("sendComment").addEventListener("click", comingSoon);
+        document.getElementById("sendComment").addEventListener("click", function(){
+          document.getElementById("formAddComment").submit();
+        });
               
   div.space  
   if(user)
