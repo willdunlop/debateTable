@@ -13,6 +13,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "express": "~4.14.0",
+    "express-jquery": "~1.8.3",
     "express-session": "^1.10.1",
     "jade": "~1.11.0",
     "method-override": "^2.3.6",
