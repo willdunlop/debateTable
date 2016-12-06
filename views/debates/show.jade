@@ -40,8 +40,7 @@ block content
       if(user)
         p
           input#inputAuthor(type="hidden",value="#{user._id}",name="author")
-        p
-          input#inputItem(type="hidden",value="#{item}",name="item")
+        
       div#commentSoon(style="display: none;")
         p Comments have yet to be fully integrated
         p Thank you for your patience
@@ -69,6 +68,7 @@ block content
   div.debateContent
     div#redside.side
       div.redItems
+        - var itemarr = [];
         - each item, i in items
           if(item.debate.toString() == debate._id)
             if(item.redblue === "left")
@@ -85,8 +85,11 @@ block content
                 p 
                   b Posted By: 
                   = item.user[0].username
+                - item._id >> itemarr
                 p
-                  button.btn.btn-default#commentButton(type="button") Comment
+                  input#inputItem(,name="item",value="#{item._id}")
+                p
+                  button.commentButton(type="button",onclick="#{idgrab}") Comment
                 
                                     
                 div.eacomment
@@ -128,7 +131,7 @@ block content
                 //-       button.btn.btn-primary#sendComment(type="button") Send
                       
     script.
-      function addCommentReveal() {
+      function addCommentReveal(item) {
          var i = document.getElementById("commentForm");
          if(i.style.display == 'block' ) {
            i.style.display = 'none';
@@ -150,8 +153,17 @@ block content
          };
       };
       
-        document.getElementById('commentButton').addEventListener("click", addCommentReveal);
+      function idgrab() {
+        var i_id = item._id; 
+        console.log(i_id);
+      }
         
+        var combutton = document.getElementsByClassName('commentButton');
+        
+                
+        for (var i=0; i < combutton.length; i++){
+          combutton[i].addEventListener('click', addCommentReveal)
+        }
         
         
         document.getElementById("sendComment").addEventListener("click", function(){
@@ -159,6 +171,7 @@ block content
         });
               
   div.space  
+  - console.log("dat itemarr = " + itemarr);
   if(user)
     btn.btn.btn-warning#contributeButtonBot(type="button") Contribute
     
