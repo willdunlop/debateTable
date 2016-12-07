@@ -32,7 +32,7 @@ block content
         button#btnSubmit(type="submit") Support Argument
         
   div#commentForm(style="display: none;")
-    form#formAddComment(name="addcomment",method="post",action="/debates/#{debate._id}")
+    form#formAddComment(name="addcomment",method="post",action="/debates/#{debate._id}/comments")
       p
       p Comment: 
         input#inputComment(type="text",placeholder="Add your comment",name="comment")
@@ -40,12 +40,15 @@ block content
       if(user)
         p
           input#inputAuthor(type="hidden",value="#{user._id}",name="author")
-        
+      
+      p
+        input#inoutItem(ty)
+      
       div#commentSoon(style="display: none;")
         p Comments have yet to be fully integrated
         p Thank you for your patience
       p
-        button.btn.btn-primary#sendComment(type="button") Send
+        button.btn.btn-primary#sendComment(type="submit",value='Submit addcoment') Send
   
   p
   div.debateTop
@@ -68,7 +71,6 @@ block content
   div.debateContent
     div#redside.side
       div.redItems
-        - var itemarr = [];
         - each item, i in items
           if(item.debate.toString() == debate._id)
             if(item.redblue === "left")
@@ -85,11 +87,10 @@ block content
                 p 
                   b Posted By: 
                   = item.user[0].username
-                - item._id >> itemarr
                 p
                   input#inputItem(,name="item",value="#{item._id}")
                 p
-                  button.commentButton(type="button",onclick="#{idgrab}") Comment
+                  button.commentButton(type="button",onclick="#{idgrab(item._id)}") Comment
                 
                                     
                 div.eacomment
@@ -112,23 +113,12 @@ block content
                 p 
                   b Posted By: 
                   = item.user[0].username
-                //- p
-                //-   button.btn.btn-default#commentButton(type="button") Comment
-                //-   
-                //- div#commentForm(style="display: none;")
-                //-   form#formAddComment(name="addcomment",method="post",action="/debates/#{debate._id}")
-                //-     p
-                //-     p Comment: 
-                //-       input#inputComment(type="text",placeholder="Add your comment",style="color: rgb(0,0,0);",name="comment")
-                //-       
-                //-     if(user)
-                //-       p
-                //-         input#inputUserComment(type="hidden",value="#{user._id}",name="author")
-                //-     div#commentSoon(style="display: none;")
-                //-       p Comments have yet to be fully integrated
-                //-       p Thank you for your patience
-                //-     p
-                //-       button.btn.btn-primary#sendComment(type="button") Send
+                p
+                  input#inputItem(name="item",value="#{item._id}")
+
+                  p
+                    button.commentButton(type="button",onclick="#{idgrab(item._id)}") Comment 
+                
                       
     script.
       function addCommentReveal(item) {
@@ -153,10 +143,9 @@ block content
          };
       };
       
-      function idgrab() {
-        var i_id = item._id; 
-        console.log(i_id);
-      }
+      function idgrab(datid) {
+        console.log(datid);
+      };
         
         var combutton = document.getElementsByClassName('commentButton');
         
@@ -165,13 +154,19 @@ block content
           combutton[i].addEventListener('click', addCommentReveal)
         }
         
+        //- var sendbutton = document.getElementsByClassName('sendComment');
+        //- for (var i=0; i < sendbutton.length; i++){
+        //-   sendbutton[i].addEventListener('click', function(){
+        //-     document.getElementById("formAddComment").submit();
+        //-   }); 
+        //- }
+        
         
         document.getElementById("sendComment").addEventListener("click", function(){
           document.getElementById("formAddComment").submit();
         });
               
   div.space  
-  - console.log("dat itemarr = " + itemarr);
   if(user)
     btn.btn.btn-warning#contributeButtonBot(type="button") Contribute
     

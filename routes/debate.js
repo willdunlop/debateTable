@@ -124,7 +124,7 @@ router.param('id', function(req, res, next, id) {
       });
       //if it is found, resume
     } else {
-      console.log(debate);
+      console.log("###MDLWRE### \n" + debate);
       //once validated, save the debate
       req.id = id;
       next();
@@ -219,6 +219,7 @@ router.route('/:id')
     });
   })
   //POST a comment for each item
+  router.route('/:id/comments')
   .post(function(req, res){
     var comment = req.body.comment;
     var author = req.user;
@@ -237,7 +238,7 @@ router.route('/:id')
           error: err
         });
       } else {
-        newComment.findOne(comment).populate('author', 'item').exec(function(err,comment){
+        commentMod.findOne(comment).populate('author', 'item').exec(function(err,comment){
           if(err) {
             console.log(err);
             res.render("error", {
@@ -248,7 +249,7 @@ router.route('/:id')
             console.log('POST: Creating new comment: ' + comment);
             res.format({
               html: function(){
-                res.redirect("/debates" + debate._id, {
+                res.redirect("/debates", {
                   "comment" : comment
                 });
               },
