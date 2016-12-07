@@ -249,7 +249,7 @@ router.route('/:id')
             console.log('POST: Creating new comment: ' + comment);
             res.format({
               html: function(){
-                res.redirect("/debates", {
+                res.redirect("/debates" {
                   "comment" : comment
                 });
               },

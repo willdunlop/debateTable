@@ -42,7 +42,7 @@ block content
           input#inputAuthor(type="hidden",value="#{user._id}",name="author")
       
       p
-        input#inoutItem(ty)
+        input#inputItem(type="hidden",name="item")
       
       div#commentSoon(style="display: none;")
         p Comments have yet to be fully integrated
@@ -90,7 +90,7 @@ block content
                 p
                   input#inputItem(,name="item",value="#{item._id}")
                 p
-                  button.commentButton(type="button",onclick="#{idgrab(item._id)}") Comment
+                  button.commentButton(type="button",value="#{item._id}") Comment
                 
                                     
                 div.eacomment
@@ -117,16 +117,17 @@ block content
                   input#inputItem(name="item",value="#{item._id}")
 
                   p
-                    button.commentButton(type="button",onclick="#{idgrab(item._id)}") Comment 
+                    button.commentButton(type="button",value="#{item._id}") Comment
                 
-                      
+
     script.
-      function addCommentReveal(item) {
+      function addCommentReveal(theid) {
          var i = document.getElementById("commentForm");
          if(i.style.display == 'block' ) {
            i.style.display = 'none';
          } else if (i.style.display == 'none') {
            i.style.display = 'block'
+          //-  i.childNodes[0]
          }  else {
            i.style.display = 'none';
          };
@@ -143,16 +144,14 @@ block content
          };
       };
       
-      function idgrab(datid) {
-        console.log(datid);
-      };
         
         var combutton = document.getElementsByClassName('commentButton');
-        
                 
         for (var i=0; i < combutton.length; i++){
-          combutton[i].addEventListener('click', addCommentReveal)
+          var theid = combutton[i].value;
+          combutton[i].addEventListener('click', addCommentReveal(theid))
         }
+        
         
         //- var sendbutton = document.getElementsByClassName('sendComment');
         //- for (var i=0; i < sendbutton.length; i++){
